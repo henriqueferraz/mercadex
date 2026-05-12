@@ -10,6 +10,8 @@
 
 **Objetivo:** Validar fluxos de compra e UX antes de escalar para produção. A Fase 2 (atual) conta com frontend React/Next.js 16.2 completo com testes automatizados; a próxima etapa é a consolidação do backend com persistência de dados.
 
+**Padrão de documentação:** novos módulos, funções públicas, contratos de API e utilitários compartilhados devem usar JSDoc.
+
 ---
 
 ## 🚀 Funcionalidades

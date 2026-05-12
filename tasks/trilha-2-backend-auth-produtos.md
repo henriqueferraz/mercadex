@@ -8,6 +8,7 @@
 
 > Trabalhar sempre dentro de `backend/src/modules/`.
 > Cada módulo segue o padrão: controller → service → repository → dto → routes → test.
+> Regra de documentação: novos módulos, funções públicas, contratos de API e utilitários compartilhados devem ser documentados com JSDoc.
 
 ---
 

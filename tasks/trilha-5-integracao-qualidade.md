@@ -8,6 +8,7 @@
 
 > Esta é a trilha de fechamento. Conecta frontend e backend, garante
 > qualidade com testes e JSDoc, e configura o CI/CD final.
+> Regra de documentação: novos módulos, funções públicas, contratos de API e utilitários compartilhados devem ser documentados com JSDoc.
 
 ---
 

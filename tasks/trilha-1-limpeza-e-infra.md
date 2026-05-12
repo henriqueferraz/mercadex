@@ -8,6 +8,7 @@
 
 > ⚠️ Cada tarefa deve ser commitada separadamente para facilitar rollback.
 > Abrir PR para `develop` ao concluir todas as tarefas desta trilha.
+> Regra de documentação: novos módulos, funções públicas, contratos de API e utilitários compartilhados devem ser documentados com JSDoc.
 
 ---
 
