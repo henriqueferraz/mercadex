@@ -570,7 +570,7 @@ git commit -m "test: testes de integracao para auth e produtos (cobertura >= 80%
 - [x] Módulo produtos funcionando (CRUD + categorias + filtros)
 - [x] Testes passando com cobertura >= 80%
 - [x] `npx tsc --noEmit` sem erros
-- [ ] Nenhum `.env` commitado
+- [x] Nenhum `.env` commitado
 - [ ] PR aberto para `develop`
 
 **Título do PR:** `feat: backend auth e produtos (JWT, CRUD, testes)`
