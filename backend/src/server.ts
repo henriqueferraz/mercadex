@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import { prisma } from './db';
 import authRoutes from './modules/auth/auth.routes';
+import productsRoutes from './modules/products/products.routes';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/products', productsRoutes);
 
 app.get('/health', async (_req, res) => {
     try {
