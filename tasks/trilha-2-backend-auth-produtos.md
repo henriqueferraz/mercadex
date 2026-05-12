@@ -13,7 +13,7 @@
 
 ## Contexto
 
-O backend usa Express + TypeScript + Prisma + PostgreSQL local (sem Docker).
+O backend usa Express + TypeScript + Prisma + Neon db.
 A arquitetura segue DDD light: cada módulo é independente e se comunica
 apenas via interfaces bem definidas.
 
@@ -42,6 +42,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // ─── Enums ───────────────────────────────────────────────────────────────────
@@ -564,7 +565,7 @@ git commit -m "test: testes de integracao para auth e produtos (cobertura >= 80%
 
 ## Checklist Final da Trilha 2
 
-- [ ] Schema Prisma criado e migration executada
+- [x] Schema Prisma criado e migration executada
 - [ ] Módulo auth funcionando (register, login, refresh, logout)
 - [ ] Módulo produtos funcionando (CRUD + categorias + filtros)
 - [ ] Testes passando com cobertura >= 80%
