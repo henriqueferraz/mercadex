@@ -1,6 +1,5 @@
 // Prisma schema — Mercadex Backend
 // Prisma 7: a URL de conexão é configurada em prisma.config.ts, não aqui.
-// Schema completo definido na Trilha 2, Tarefa 2.1
 // https://pris.ly/d/prisma-schema
 
 generator client {
@@ -12,11 +11,131 @@ datasource db {
   provider = "postgresql"
 }
 
-// Placeholder — modelos completos adicionados na Trilha 2
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum Condition {
+  NOVO
+  EXCELENTE
+  BOM
+  USADO
+}
+
+enum OrderStatus {
+  PENDENTE
+  PAGO
+  ENVIADO
+  ENTREGUE
+  CANCELADO
+}
+
+// ─── Models ──────────────────────────────────────────────────────────────────
+
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  name         String?
+  role         Role     @default(CUSTOMER)
+  avatarUrl    String?  @map("avatar_url")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  orders   Order[]
+  cart     Cart?
+  products Product[]
+
+  @@map("users")
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  products    Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id              String    @id @default(uuid())
+  sellerId        String    @map("seller_id")
+  categoryId      String    @map("category_id")
+  title           String
+  description     String?
+  price           Decimal   @db.Decimal(10, 2)
+  condition       Condition
+  images          Json      @default("[]")
+  stock           Int       @default(0)
+  active          Boolean   @default(true)
+  viewsCount      Int       @default(0) @map("views_count")
+  stripeProductId String?   @map("stripe_product_id")
+  stripePriceId   String?   @map("stripe_price_id")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  seller     User        @relation(fields: [sellerId], references: [id])
+  category   Category    @relation(fields: [categoryId], references: [id])
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+
+  @@map("products")
+}
+
+model Cart {
+  id        String   @id @default(uuid())
+  userId    String   @unique @map("user_id")
+  sessionId String?  @map("session_id")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user  User       @relation(fields: [userId], references: [id])
+  items CartItem[]
+
+  @@map("carts")
+}
+
+model CartItem {
+  id        String @id @default(uuid())
+  cartId    String @map("cart_id")
+  productId String @map("product_id")
+  quantity  Int    @default(1)
+
+  cart    Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([cartId, productId])
+  @@map("cart_items")
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  buyerId         String      @map("buyer_id")
+  totalPrice      Decimal     @map("total_price") @db.Decimal(10, 2)
+  status          OrderStatus @default(PENDENTE)
+  shippingAddress Json        @map("shipping_address")
+  stripePaymentId String?     @map("stripe_payment_id")
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+
+  buyer User        @relation(fields: [buyerId], references: [id])
+  items OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String  @map("order_id")
+  productId String  @map("product_id")
+  quantity  Int
+  unitPrice Decimal @map("unit_price") @db.Decimal(10, 2)
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
 }
