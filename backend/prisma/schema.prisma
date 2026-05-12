@@ -1,4 +1,5 @@
 // Prisma schema — Mercadex Backend
+// Prisma 7: a URL de conexão é configurada em prisma.config.ts, não aqui.
 // Schema completo definido na Trilha 2, Tarefa 2.1
 // https://pris.ly/d/prisma-schema
 
@@ -9,7 +10,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 // Placeholder — modelos completos adicionados na Trilha 2

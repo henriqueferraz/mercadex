@@ -4,4 +4,5 @@ dist/
 *.tsbuildinfo
 coverage/
 
-/src/generated/prisma
+# Prisma generated client (gerado via `npm run db:generate`)
+src/generated/
