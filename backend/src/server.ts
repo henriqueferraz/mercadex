@@ -2,7 +2,9 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
 import { prisma } from './db';
+import authRoutes from './modules/auth/auth.routes';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -10,6 +12,9 @@ const PORT = process.env.PORT || 3001;
 app.use(helmet());
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json());
+app.use(cookieParser());
+
+app.use('/api/auth', authRoutes);
 
 app.get('/health', async (_req, res) => {
     try {
