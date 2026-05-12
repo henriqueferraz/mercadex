@@ -422,7 +422,6 @@ Criar `backend/.env.example`:
 ```bash
 # Banco de dados (Neon Postgres)
 DATABASE_URL="postgresql://USER:PASSWORD@ep-your-project-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
-DIRECT_URL="postgresql://USER:PASSWORD@ep-your-project.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 
 # JWT
 JWT_SECRET="troque-por-uma-string-aleatoria-longa"
