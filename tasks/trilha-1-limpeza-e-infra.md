@@ -182,6 +182,6 @@ Antes de abrir o PR:
 - [x] Tarefa 1.6 concluída — `npm run build` passando
 - [x] Tarefa 1.7 concluída — backend sobe sem erros
 - [x] Nenhum `.env` ou secret commitado
-- [ ] PR aberto para `develop` com descrição das mudanças
+- [x] PR aberto para `develop` com descrição das mudanças
 
 **Título do PR:** `chore: limpeza do repositorio, migracao Jest, atualizacao deps e setup backend`
