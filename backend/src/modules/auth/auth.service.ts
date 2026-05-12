@@ -3,16 +3,27 @@ import jwt, { type SignOptions } from 'jsonwebtoken';
 import type { LoginInput, RegisterInput } from './auth.dto';
 import { authRepository } from './auth.repository';
 
-const JWT_SECRET = process.env.JWT_SECRET;
-const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
-const JWT_EXPIRES_IN = (process.env.JWT_EXPIRES_IN ?? '15m') as SignOptions['expiresIn'];
-const JWT_REFRESH_EXPIRES_IN = (process.env.JWT_REFRESH_EXPIRES_IN ?? '7d') as SignOptions['expiresIn'];
-
 function assertEnv(value: string | undefined, name: string): string {
   if (!value) {
     throw new Error(`MISSING_${name}`);
   }
   return value;
+}
+
+function getJwtSecret() {
+  return assertEnv(process.env.JWT_SECRET, 'JWT_SECRET');
+}
+
+function getJwtRefreshSecret() {
+  return assertEnv(process.env.JWT_REFRESH_SECRET, 'JWT_REFRESH_SECRET');
+}
+
+function getJwtExpiresIn() {
+  return (process.env.JWT_EXPIRES_IN ?? '15m') as SignOptions['expiresIn'];
+}
+
+function getJwtRefreshExpiresIn() {
+  return (process.env.JWT_REFRESH_EXPIRES_IN ?? '7d') as SignOptions['expiresIn'];
 }
 
 function publicUser(user: {
@@ -59,14 +70,14 @@ export const authService = {
 
     const accessToken = jwt.sign(
       { sub: user.id, role: user.role },
-      assertEnv(JWT_SECRET, 'JWT_SECRET') as jwt.Secret,
-      { expiresIn: JWT_EXPIRES_IN },
+      getJwtSecret() as jwt.Secret,
+      { expiresIn: getJwtExpiresIn() },
     );
 
     const refreshToken = jwt.sign(
       { sub: user.id },
-      assertEnv(JWT_REFRESH_SECRET, 'JWT_REFRESH_SECRET') as jwt.Secret,
-      { expiresIn: JWT_REFRESH_EXPIRES_IN },
+      getJwtRefreshSecret() as jwt.Secret,
+      { expiresIn: getJwtRefreshExpiresIn() },
     );
 
     return {
@@ -79,7 +90,7 @@ export const authService = {
   async refresh(refreshToken: string) {
     const payload = jwt.verify(
       refreshToken,
-      assertEnv(JWT_REFRESH_SECRET, 'JWT_REFRESH_SECRET') as jwt.Secret,
+      getJwtRefreshSecret() as jwt.Secret,
     ) as { sub: string };
 
     const user = await authRepository.findById(payload.sub);
@@ -89,8 +100,8 @@ export const authService = {
 
     const accessToken = jwt.sign(
       { sub: user.id, role: user.role },
-      assertEnv(JWT_SECRET, 'JWT_SECRET') as jwt.Secret,
-      { expiresIn: JWT_EXPIRES_IN },
+      getJwtSecret() as jwt.Secret,
+      { expiresIn: getJwtExpiresIn() },
     );
 
     return { accessToken };

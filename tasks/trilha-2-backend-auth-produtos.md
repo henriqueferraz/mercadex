@@ -568,8 +568,8 @@ git commit -m "test: testes de integracao para auth e produtos (cobertura >= 80%
 - [x] Schema Prisma criado e migration executada
 - [x] Módulo auth funcionando (register, login, refresh, logout)
 - [x] Módulo produtos funcionando (CRUD + categorias + filtros)
-- [ ] Testes passando com cobertura >= 80%
-- [ ] `npx tsc --noEmit` sem erros
+- [x] Testes passando com cobertura >= 80%
+- [x] `npx tsc --noEmit` sem erros
 - [ ] Nenhum `.env` commitado
 - [ ] PR aberto para `develop`
 
