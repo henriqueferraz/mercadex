@@ -497,7 +497,7 @@ Antes de abrir o PR:
 - [x] Tarefa 1.2 concluída e commitada
 - [x] Tarefa 1.3 concluída e commitada
 - [x] Tarefa 1.4 concluída e commitada
-- [ ] Tarefa 1.5 concluída — `npm run test` passando (163 testes)
+- [x] Tarefa 1.5 concluída — `npm run test` passando (163 testes)
 - [ ] Tarefa 1.6 concluída — `npm run build` passando
 - [ ] Tarefa 1.7 concluída — backend sobe sem erros e aponta para Neon
 - [ ] Nenhum `.env` ou secret commitado
