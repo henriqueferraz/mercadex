@@ -48,8 +48,8 @@ export const productsRepository = {
     },
 
     findById(id: string) {
-        return prisma.product.findUnique({
-            where: { id },
+        return prisma.product.findFirst({
+            where: { id, active: true },
             include: { category: true, seller: { select: { id: true, name: true } } },
         });
     },

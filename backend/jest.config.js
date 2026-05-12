@@ -7,9 +7,13 @@ const config = {
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/src/$1',
     },
+    setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+    setupFiles: ['dotenv/config'],
     collectCoverageFrom: [
         'src/**/*.ts',
         '!src/server.ts',
+        '!src/test-setup.ts',
+        '!src/generated/**',
     ],
     coverageThreshold: {
         global: {

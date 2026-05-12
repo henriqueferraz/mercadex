@@ -564,9 +564,9 @@ git commit -m "test: testes de integracao para auth e produtos (cobertura >= 80%
 
 ## Checklist Final da Trilha 2
 
-- [ ] Schema Prisma criado e migration executada
-- [ ] Módulo auth funcionando (register, login, refresh, logout)
-- [ ] Módulo produtos funcionando (CRUD + categorias + filtros)
+- [x] Schema Prisma criado e migration executada
+- [x] Módulo auth funcionando (register, login, refresh, logout)
+- [x] Módulo produtos funcionando (CRUD + categorias + filtros)
 - [ ] Testes passando com cobertura >= 80%
 - [ ] `npx tsc --noEmit` sem erros
 - [ ] Nenhum `.env` commitado
