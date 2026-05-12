@@ -10,6 +10,9 @@ node_modules/
 /.next/
 /out/
 
+# TypeScript
+*.tsbuildinfo
+
 # Production
 /build
 /dist
@@ -47,4 +50,3 @@ Thumbs.db
 /blob-report/
 /playwright/.cache/
 next-env.d.ts
-package-lock.json
